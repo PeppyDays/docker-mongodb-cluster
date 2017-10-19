@@ -1,0 +1,103 @@
+version: '3'
+
+services:
+  kakao01-primary:
+    image: mongo:3.4.9
+    container_name: kakao01-primary
+    hostname: kakao01-primary
+    volumes:
+      - ./data/kakao01/primary:/data/db
+      - ./conf/mongod.kakao01.conf:/etc/mongod.conf
+    ports:
+      - 27017:27017
+    command: mongod -f /etc/mongod.conf
+  kakao01-secondary:
+    image: mongo:3.4.9
+    container_name: kakao01-secondary
+    hostname: kakao01-secondary
+    volumes:
+      - ./data/kakao01/secondary:/data/db
+      - ./conf/mongod.kakao01.conf:/etc/mongod.conf
+    ports:
+      - 27018:27017
+    command: mongod -f /etc/mongod.conf
+  kakao01-arbiter:
+    image: mongo:3.4.9
+    container_name: kakao01-arbiter
+    hostname: kakao01-arbiter
+    volumes:
+      - ./data/kakao01/arbiter:/data/db
+      - ./conf/mongod.kakao01.conf:/etc/mongod.conf
+    ports:
+      - 27019:27017
+    command: mongod -f /etc/mongod.conf
+  kakao02-primary:
+    image: mongo:3.4.9
+    container_name: kakao02-primary
+    hostname: kakao02-primary
+    volumes:
+      - ./data/kakao02/primary:/data/db
+      - ./conf/mongod.kakao02.conf:/etc/mongod.conf
+    ports:
+      - 27027:27017
+    command: mongod -f /etc/mongod.conf
+  kakao02-secondary:
+    image: mongo:3.4.9
+    container_name: kakao02-secondary
+    hostname: kakao02-secondary
+    volumes:
+      - ./data/kakao02/secondary:/data/db
+      - ./conf/mongod.kakao02.conf:/etc/mongod.conf
+    ports:
+      - 27028:27017
+    command: mongod -f /etc/mongod.conf
+  kakao02-arbiter:
+    image: mongo:3.4.9
+    container_name: kakao02-arbiter
+    hostname: kakao02-arbiter
+    volumes:
+      - ./data/kakao02/arbiter:/data/db
+      - ./conf/mongod.kakao02.conf:/etc/mongod.conf
+    ports:
+      - 27029:27017
+    command: mongod -f /etc/mongod.conf
+  config-primary:
+    image: mongo:3.4.9
+    container_name: config-primary
+    hostname: config-primary
+    volumes:
+      - ./data/config/primary:/data/db
+      - ./conf/mongod.config.conf:/etc/mongod.conf
+    ports:
+      - 27037:27017
+    command: mongod -f /etc/mongod.conf
+  config-secondary:
+    image: mongo:3.4.9
+    container_name: config-secondary
+    hostname: config-secondary
+    volumes:
+      - ./data/config/secondary:/data/db
+      - ./conf/mongod.config.conf:/etc/mongod.conf
+    ports:
+      - 27038:27017
+    command: mongod -f /etc/mongod.conf
+  config-tertiary:
+    image: mongo:3.4.9
+    container_name: config-tertiary
+    hostname: config-tertiary
+    volumes:
+      - ./data/config/tertiary:/data/db
+      - ./conf/mongod.config.conf:/etc/mongod.conf
+    ports:
+      - 27039:27017
+    command: mongod -f /etc/mongod.conf
+  mongos:
+    image: mongo:3.4.9
+    container_name: mongos
+    hostname: mongos
+    volumes:
+      - ./data/mongos:/data/db
+      - ./conf/mongos.kakao.conf:/etc/mongos.conf
+    ports:
+      - 27047:27017
+    command: mongos -f /etc/mongos.conf
