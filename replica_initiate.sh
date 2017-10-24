@@ -10,8 +10,8 @@ for shard in ${shards[@]}; do
 
   echo ""
   echo "Add $shard secondary and arbiter to replica set"
-  docker exec $shard-primary bash -c "echo \"rs.add('$shard-secondary');\" | mongo"
-  docker exec $shard-primary bash -c "echo \"rs.addArb('$shard-arbiter');\" | mongo"
+  docker exec $shard-primary bash -c "echo \"rs.add('$shard-secondary:27017');\" | mongo"
+  docker exec $shard-primary bash -c "echo \"rs.addArb('$shard-arbiter:27017');\" | mongo"
 done
 
 shard="config"
@@ -23,6 +23,6 @@ sleep 1
 
 echo ""
 echo "Add $shard secondaries to replica set"
-docker exec $shard-primary bash -c "echo \"rs.add('$shard-secondary');\" | mongo"
-docker exec $shard-primary bash -c "echo \"rs.add('$shard-tertiary');\" | mongo"
+docker exec $shard-primary bash -c "echo \"rs.add('$shard-secondary:27017');\" | mongo"
+docker exec $shard-primary bash -c "echo \"rs.add('$shard-tertiary:27017');\" | mongo"
 
